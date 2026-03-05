@@ -40,7 +40,6 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'Kolozsvári Műszakis Klub',
     title: 'Hackathon (3rd place)',
     start: '2024',
-    end: '',
     link: '',
     id: 'work2',
   }
