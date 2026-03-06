@@ -10,7 +10,8 @@ type WorkExperience = {
   company: string
   title: string
   start: string
-  link: string
+  end?: string
+  link?: string
   id: string
 }
 

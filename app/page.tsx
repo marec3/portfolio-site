@@ -1,8 +1,11 @@
 'use client'
+
 import { motion } from 'motion/react'
 import { XIcon } from 'lucide-react'
+import Link from 'next/link'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
+import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -10,15 +13,7 @@ import {
   MorphingDialogClose,
   MorphingDialogContainer,
 } from '@/components/ui/morphing-dialog'
-import Link from 'next/link'
-import { AnimatedBackground } from '@/components/ui/animated-background'
-import {
-  PROJECTS,
-  WORK_EXPERIENCE,
-  BLOG_POSTS,
-  EMAIL,
-  SOCIAL_LINKS,
-} from './data'
+import { WORK_EXPERIENCE, BLOG_POSTS, EMAIL, SOCIAL_LINKS } from './data'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -61,6 +56,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
           className="aspect-video w-full cursor-zoom-in rounded-xl"
         />
       </MorphingDialogTrigger>
+
       <MorphingDialogContainer>
         <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
           <video
@@ -71,6 +67,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
             className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
           />
         </MorphingDialogContent>
+
         <MorphingDialogClose
           className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
           variants={{
@@ -100,6 +97,8 @@ function MagneticSocialLink({
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <a
         href={link}
+        target="_blank"
+        rel="noopener noreferrer"
         className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
       >
         {children}
@@ -116,7 +115,7 @@ function MagneticSocialLink({
             fill="currentColor"
             fillRule="evenodd"
             clipRule="evenodd"
-          ></path>
+          />
         </svg>
       </a>
     </Magnetic>
@@ -137,14 +136,13 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Third-year Automation and Computer Engineering student passionate about technology and problem solving.
-            I enjoy exploring different areas of software development and turning ideas into practical projects.
-            Always curious, always learning.
+            Third-year Automation and Computer Engineering student passionate
+            about technology and problem solving. I enjoy exploring different
+            areas of software development and turning ideas into practical
+            projects. Always curious, always learning.
           </p>
         </div>
       </motion.section>
-
-
 
       <motion.section
         variants={VARIANTS_SECTION}
@@ -153,14 +151,18 @@ export default function Personal() {
         <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => {
-            const Wrapper: any = job.link ? 'a' : 'div'
+            const Wrapper = job.link ? 'a' : 'div'
 
             return (
               <Wrapper
                 key={job.id}
                 className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
                 {...(job.link
-                  ? { href: job.link, target: '_blank', rel: 'noopener noreferrer' }
+                  ? {
+                      href: job.link,
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    }
                   : {})}
               >
                 <Spotlight
@@ -170,8 +172,12 @@ export default function Personal() {
                 <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
                   <div className="relative flex w-full flex-row justify-between">
                     <div>
-                      <h4 className="font-normal dark:text-zinc-100">{job.title}</h4>
-                      <p className="text-zinc-500 dark:text-zinc-400">{job.company}</p>
+                      <h4 className="font-normal dark:text-zinc-100">
+                        {job.title}
+                      </h4>
+                      <p className="text-zinc-500 dark:text-zinc-400">
+                        {job.company}
+                      </p>
                     </div>
                     <p className="text-zinc-600 dark:text-zinc-400">
                       {job.end ? `${job.start} - ${job.end}` : job.start}
@@ -231,6 +237,7 @@ export default function Personal() {
             {EMAIL}
           </a>
         </p>
+
         <div className="flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
             <MagneticSocialLink key={link.label} link={link.link}>
